@@ -5,10 +5,10 @@ with open('./02-data.txt') as f:
     data = f.read()
 
 items = data.split('\n')
-print(f"item count: {len(items)}")
-a = 0
-r = 0
-#items = ['2x3x4', '1x1x10']
+
+paper = 0
+ribbon = 0
+
 for i in items:
     w,h,l = [int(x) for x in i.split('x')]
 
@@ -19,9 +19,9 @@ for i in items:
     first = dims[:2]
     last = dims[1:]
 
-    r += (min(first) * 2) + (min(last)*2) + vol
+    ribbon += (min(first) * 2) + (min(last)*2) + vol
 
-    a += sum(areas*2) + min(areas)
+    paper += sum(areas*2) + min(areas)
     
-print(f"required paper: {a}")
-print(f'required ribbon: {r}')
+print(f"required paper: {paper}")
+print(f'required ribbon: {ribbon}')
