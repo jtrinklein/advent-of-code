@@ -50,11 +50,27 @@ def process_command(c):
     x, y = move(dx, dy)
     increment_value(x, y)
 
-increment_value(x, y)
-for c in list(data):
-    process_command(c)
-    isRobo = not isRobo
+def do_flight(with_robo=False):
+    global x
+    global y
+    global isRobo
+    increment_value(x, y)
 
+    for c in list(data):
+        process_command(c)
+        if with_robo:
+            isRobo = not isRobo
+
+# part 1
+houses = {}
+x,y = 0,0
+do_flight(with_robo=False)
 deliveries = len(houses.items())
+print(f"deliveries: {deliveries}")
 
+# part 2
+houses = {}
+x,y = 0,0
+do_flight(with_robo=True)
+deliveries = len(houses.items())
 print(f"deliveries: {deliveries}")
