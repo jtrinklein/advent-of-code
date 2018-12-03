@@ -1,4 +1,4 @@
-#!/usr/local/bin/python3
+#!/usr/bin/env python3
 import ast
 import re
 data = None
@@ -36,7 +36,3 @@ print('decoded: ', decoded)
 print('encoded: ', encoded)
 print('diff (r-d):', raw - decoded)
 print('diff (e-r):', encoded - raw)
-
-"""
-https://media.ccc.de/v/c4.openchaos.2018.06.glitching-the-switch
-"""

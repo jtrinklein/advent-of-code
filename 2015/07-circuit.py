@@ -1,4 +1,10 @@
-#!/usr/local/bin/python3
+#!/usr/bin/env python3
+
+"""
+This is one solution which is not my own.
+I don't remember the source though. I went through a couple different ones.
+I'm still trying to understand the solution before I personalize it.
+"""
 
 data = None
 
