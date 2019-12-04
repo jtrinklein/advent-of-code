@@ -33,6 +33,8 @@ for line in data:
 
 ready = [x for x in steps if x not in dependants]
 ready.sort()
+print(ready)
+
 def part_1():
 
     order = ''
@@ -71,11 +73,13 @@ def part_1():
 # todo: finish part 2 :(
 done = False
 time = 0
+elfcount = 5
 times = [   0,    0,    0,    0,    0]
 steps = [None, None, None, None, None]
 finished = ''
 while not done:
-    for i in range(5):
+    for i in range(elfcount):
+        
         t = times[i]
         if t > 0:
             times[i] = t - 1
@@ -96,7 +100,7 @@ while not done:
                     continue
                 ready.append(d)
                 ready.sort()
-    for i in range(5):
+    for i in range(elfcount):
         if len(ready) > 0 and steps[i] == None:
             s = ready.pop(0)
             steps[i] = s
@@ -104,7 +108,11 @@ while not done:
     if len([x for x in times if x > 0]) == 0 and len([x for x in steps if x != None]) == 0 and len(ready) == 0:
         done = True
     time += 1
+    # print('--')
+    # print(f'wip: {steps}')
+    # print(f'fin: {finished}')
 #897 not correct....
-print(time)
+#896 is correct!
+print(time - 1)
                     
                         
