@@ -83,7 +83,6 @@ def part2(p):
         a[m] = (x1,y1)
         angles[deg] = a
         
-    i = 0
     keylist = list(angles.keys())
     keylist.sort()
     # print(keylist)
