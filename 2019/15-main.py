@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 from collections import deque
-import platform
-if platform.system() == 'Windows':
-    from msvcrt import getch
-else:
-    #requires: pip install getch
-    from getch import getch
+# import platform
+# if platform.system() == 'Windows':
+#     from msvcrt import getch
+# else:
+#     #requires: pip install getch
+#     from getch import getch
 
 data = []
 
