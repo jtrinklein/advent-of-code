@@ -10,11 +10,27 @@ def validate(min, max, char, pwd):
     c = pwd.count(char)
     return min <= c and c <= max
 
-def get_valid_passwords(d):
-    return [pwd for min,max,ch,pwd in d if validate(min,max,ch,pwd)]
+def xor(a,b):
+    return (a or b) and a != b
+
+def validate2(p1, p2, ch, pwd):
+    # p1,p2 represent character position not index
+    # 1 is first character, thus index 0
+    p1 -= 1
+    p2 -= 1
+    l = len(pwd)
+    return p1 < l and p2 < l and xor(pwd[p1] == ch, pwd[p2] == ch)
+
+def get_valid_passwords(d, validator):
+    return [pwd for min,max,ch,pwd in d if validator(min,max,ch,pwd)]
 
 def part1(d):
-    c = len(get_valid_passwords(d))
+    c = len(get_valid_passwords(d, validate))
     print(f'{c} valid passwords')
 
-part1(data)
+def part2(d):
+    c = len(get_valid_passwords(d, validate2))
+    print(f'{c} valid passwords')
+
+#part1(data)
+part2(data)
