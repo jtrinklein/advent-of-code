@@ -22,5 +22,20 @@ def part1(d):
     c = count_trees_on_trajectory(0,0, 3, 1, d)
     print(f'encountered {c} trees')
 
-part1(data)
+def part2(d):
+    product = 1
+    trajectories= [
+        (1, 1),
+        (3, 1),
+        (5, 1),
+        (7, 1),
+        (1, 2),
+    ]
+    for dx,dy in trajectories:
+        c = count_trees_on_trajectory(0,0, dx, dy, d)
+        print(f'({dx}, {dy}) encountered {c} trees')
+        product *= c
+    print(f'result = {product}')
+
+part2(data)
 
