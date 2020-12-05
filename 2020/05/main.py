@@ -27,4 +27,12 @@ def part1(seats):
     max_seat = max([get_seat_id(seat) for seat in seats])
     print(max_seat)
 
-part1(data)
+def part2(seats):
+    seat_ids = [get_seat_id(seat) for seat in seats]
+    #first seat id is 0 -> 0*8 + 0
+    #last seat id is 1023 -> 127*8 + 7
+    for sid in range(1,1023): #remember range ends BEFORE stop value
+        if (sid not in seat_ids) and (sid+1 in seat_ids) and (sid-1 in seat_ids):
+            print(sid)
+
+part2(data)
