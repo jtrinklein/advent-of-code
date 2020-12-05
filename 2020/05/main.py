@@ -1,6 +1,4 @@
 #!/usr/bin/env python3
-from os import getsid, replace
-
 data = []
 
 with open('./data.txt') as f:
