@@ -14,4 +14,17 @@ def part1(d):
     c = sum_group_answers(d)
     print(f'total answers: {c}')
 
-part1(data)
+def count_group_consensus_answers(group, answers):
+    for g in group.split('\n'):
+        answers = [a for a in answers if a in g]
+    return len(answers)
+
+def sum_group_consensus_answers(groups):
+    potential_answers = list('abcdefghijklmnopqrstuvwxyz')
+    return sum([count_group_consensus_answers(group, potential_answers) for group in groups])
+
+def part2(d):
+    c = sum_group_consensus_answers(d)
+    print(f'total consensus answers: {c}')
+
+part2(data)
