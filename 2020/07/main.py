@@ -21,8 +21,8 @@ def add_bag(bag, bag_db):
         if count != 'no':
             bagname = get_bag_name(rest)
 
-            # bag_db[main_bag].append((bagname, int(count)))
-            bag_db[main_bag].append(bagname)
+            bag_db[main_bag].append((bagname, int(count)))
+            #bag_db[main_bag].append(bagname)
 
 def get_bags_db(d):
     bag_db = {}
@@ -33,7 +33,7 @@ def get_bags_db(d):
 
 def bag_holds(bag, target, bag_db):
     holds_target = False
-    can_be_held = bag_db[bag]
+    can_be_held = [b for b,c in bag_db[bag]]
     if target in can_be_held:
         return True
     for b in can_be_held:
@@ -48,4 +48,17 @@ def part1(d):
 
     print(f'{count} bags can eventually hold {target} bag')
 
-part1(data)
+def get_bag_count(bag, db):
+    total = 0
+
+    for b,c in db[bag]:
+        total += c  + c * get_bag_count(b, db)
+
+    return total
+
+def part2(d):
+    db = get_bags_db(d)
+    target = 'shiny gold'
+    count = get_bag_count(target, db)
+    print(f'{target} contains {count} bags')
+part2(data)
