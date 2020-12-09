@@ -20,8 +20,22 @@ def part1(d):
 
         if len(vals) == preamble_length and not is_XMAS_encoded(vals, v):
             print(f'first non-encoded value: {v}')
-            return
+            return v
 
         vals.append(v)
 
-part1(data)
+def part2(d):
+    target_value = part1(d)
+    range_end = d.index(target_value) + 1
+    for chain_length in range(2, 26):
+        print(f'trying chain length of: {chain_length}')
+        for i in range(range_end - chain_length + 1):
+            values = d[i : i + chain_length]
+            s = sum(values)
+            if s == target_value:
+                print(f'these values: {values}')
+                print(f'sum to this value: {target_value}')
+                print(f'sum of smallest and largest is: {min(values) + max(values)}')
+                return
+
+part2(data)
