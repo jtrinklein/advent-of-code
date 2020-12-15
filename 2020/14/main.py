@@ -93,9 +93,9 @@ def part2(d):
     print(f'final value: {value}')
 
 #part1(data)
-part2(data)
 
 # m = max([x.count('X') for x in data])
 # print(f'max X in a mask: {m}')
 # max x in line is 9 - should not explode computer to bruteforce
+
 part2(data)
