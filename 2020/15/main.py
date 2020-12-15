@@ -27,6 +27,39 @@ def part1(d):
 
     print(f'2020th number spoken: {n}')
 
-part1(data[:])
+def part2(d):
+    # keys are spoken numbers
+    # value is index of last speak
+    db = {}
+    
+    #seed the db
+    for pos,c in enumerate(d):
+        db[c] = pos
+    
+    # remove the last seed number from db
+    del db[d[-1]]
+    
+    # set the last seed number as the next to be spoken
+    spoken = None
+    to_speak = d[-1]
+
+    for i in range(len(d)-1, 30000000):
+        # speak the next number
+        spoken = to_speak
+
+        if i > (30000000 - 10):
+            print(f'{spoken}')
+        # find out if the spoken number has been spoken before
+        # if not previously spoken, the next speak is 0
+        # if yes previously spoken, the next speak is current position - last spoken position
+        to_speak = 0 if spoken not in db else (i - db[spoken])
+        
+        # update the db for the spoken number and current position
+        db[spoken] = i
+
+
+    print(f'last spoken number: {spoken}')
+# part1(data[:])
+part2(data[:])
 
     
