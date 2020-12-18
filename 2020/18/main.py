@@ -16,7 +16,6 @@ def eval_expr(ex):
     # return [    3,+,3]
 
     while len(ex) > 1:
-
         # may only have 2 left if ex ends with closing parens
         if ex[1] == ')':
             return ex[0:1] + ex[2:]
@@ -34,6 +33,47 @@ def eval_expr(ex):
             ex = [a*b] + ex[3:]
     return ex
 
+def eval_different(ex):
+    # first check for parentheticals
+    while '(' in ex:
+        pcount = 1
+        start = ex.index('(')
+        end = start
+        #find the end of this parenthetical
+        while pcount:
+            end += 1
+            if ex[end] == ')':
+                pcount -=1
+            elif ex[end] == '(':
+                pcount += 1
+
+        # evaluate the parenthetical
+        v = eval_different(ex[start+1:end])
+        # remove the parenthetical from the expression
+        # and replace it with the value
+        ex = ex[:start] + v + ex[end+1:]
+
+    # no parentheticals, check for +
+    # for all + operators in the expression
+    while '+' in ex:
+        i = ex.index('+')
+        # evaluate the expression
+        v = ex[i-1] + ex[i+1]
+        # replace the expression with the value
+        ex = ex[:i-1] + [v] + ex[i+2:]
+
+    # no parentheticals or +, check for *
+    # for all * operators in the expression
+    while '*' in ex:
+        i = ex.index('*')
+
+        # evaluate the expression
+        v = ex[i-1] * ex[i+1]
+        # replace the expression with the value
+        ex = ex[:i-1] + [v] + ex[i+2:]
+
+    return ex
+
 def process_input(s):
     return [int(x) if x.isnumeric() else x for x in list(s.strip().replace(' ', ''))]
 
@@ -46,15 +86,12 @@ def part1(d):
         print(answer)
     print(f'sum of all expressions is {total}')
 
-# data =  [
-#     '2 * 3 + (4 * 5)',
-#     # = 26
-#     '5 + (8 * 3 + 9 + 3 * 4 * 3)',
-#     # = 437
-#     '5 * 9 * (7 * 3 * 3 + 9 * 3 + (8 + 6 * 4))',
-#     #= 12240
-#     '((2 + 4 * 9) * (6 + 9 * 8 + 6) + 6) + 2 + 4 * 2',
-#     #= 13632.
-# ]
+def part2(d):
+    total = 0 
+    for line in d:
+        expr = process_input(line)
+        answer = eval_different(expr)[0]
+        total += answer
+    print(f'sum of all expressions using eval_different is {total}')
 
-part1(data)
+part2(data)
