@@ -10,8 +10,8 @@ with open('./data.txt') as f:
 
 digit_signals = [ 'abcefg', 'cf', 'acdeg', 'acdfg', 'bcdf', 'abdfg', 'abdefg', 'acf', 'abcdefg', 'abcdfg']
 
-def get_mapped_digit(digit: str, signal_map: Dict[str,str]) -> str:
-    v = [signal_map[x] for x in list(digit)]
+def get_mapped_digit(signals: str, signal_map: Dict[str,str]) -> str:
+    v = [signal_map[x] for x in list(signals)]
     v.sort()
     s = ''.join(v)
     if s in digit_signals:
@@ -25,17 +25,17 @@ def gen_all_maps() -> List[Dict[str,str]]:
         maps.append({a:b for a,b in zip(alpha,p)})
     return maps
 
-def get_correct_mapping(digits: List[str], all_maps: List[Dict[str,str]]) -> Dict[str,str]:
+def get_correct_mapping(digit_signals: List[str], all_maps: List[Dict[str,str]]) -> Dict[str,str]:
     for m in all_maps:
         keys = set()
-        good = True
-        for d in digits:
-            n = get_mapped_digit(d, m)
+        done = True
+        for signals in digit_signals:
+            n = get_mapped_digit(signals, m)
             if n is None or n in keys:
-                good = False
+                done = False
                 break
             keys.add(n)
-        if good:
+        if done:
             return m
     return None
 
@@ -44,18 +44,16 @@ def part1(displays: Tuple[List[str],List[str]]) -> None:
     print(signals_used)
 
 def part2(displays: Tuple[List[str],List[str]]) -> None:
-    
     all_maps = gen_all_maps()
     total = 0
-    for digits,code in displays:
-        m = get_correct_mapping(digits, all_maps)
-        v = 0
+    for digit_signals,code_signals in displays:
+        m = get_correct_mapping(digit_signals, all_maps)
+        display_value = 0
         if m is not None:
-            for c in code:
-                v = v*10 + get_mapped_digit(c, m)
-        total += v
+            for c in code_signals:
+                display_value = display_value*10 + get_mapped_digit(c, m)
+        total += display_value
     print(f'total: {total}')
 
 # part1(data)
 part2(data)
-
