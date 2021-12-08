@@ -9,7 +9,7 @@ data = []
 with open('./data.txt') as f:
     data = [int(x) for x in f.readline().strip().split(',')]
 
-def find_optimal_position(d: List[int], cost_aggregator: AggregatorFn, v=0) -> Tuple[int,int]:
+def find_optimal_position(d: List[int], cost_aggregator: AggregatorFn) -> Tuple[int,int]:
     
     mean = round(statistics.mean(d))
     mode = int(statistics.mode(data))
@@ -43,7 +43,7 @@ def part2(d: List[int]) -> None:
             # where n is distance to final position
             n*(n+1)//2 for n in [abs(c - alignment_position) for c in crab_positions]
         ]
-    fuel_used, pos = find_optimal_position(d, cost_aggregator, v=v)   
+    fuel_used, pos = find_optimal_position(d, cost_aggregator)
     print(f'part2 - best: {fuel_used} to get to {pos}')
 
 # data = [16,1,2,0,4,2,7,1,2,14]
