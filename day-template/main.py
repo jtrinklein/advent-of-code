@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
+from time import time
 
-data = []
-with open('./data.txt') as f:
-    data = [x for x in f.readlines()]
+def parse_input(filename: str):
+    data = []
+    with open(filename) as f:
+        data = [x for x in f.readlines()]
+    return data
 
 def part1(d):
     pass
@@ -10,5 +13,14 @@ def part1(d):
 def part2(d):
     pass
 
-part1(data)
-#part2(data)
+def run():
+    data = parse_input('./test.data.txt')
+    start_time = time()
+    part1(data)
+    # part2(data)
+    end_time = time()
+    duration = end_time - start_time
+    print(f'\nIt took {duration} seconds.')
+
+if __name__ == '__main__':
+    run()
